@@ -8,14 +8,17 @@ public class EmpWageComputation implements IComputeEmpWage {
 
 	private int numOfCompany=0;
 	private LinkedList<CompanyEmployeeWage> companyEmpWageList;
+	private Map<String,CompanyEmployeeWage> companyToEmpWageMap;
 	
 	public EmpWageComputation() {
 		companyEmpWageList = new LinkedList<>() ;
+		companyToEmpWageMap=new HashMap<>();
 	}
 
 	public void addCompanyEmpWage(String company,int empRatePerHour,int numOfWorkingDays,int maxHoursPerMonth) {
 		CompanyEmployeeWage companyEmpWage=new CompanyEmployeeWage(company,empRatePerHour,numOfWorkingDays,maxHoursPerMonth);
 		companyEmpWageList.add(companyEmpWage);
+		companyToEmpWageMap.put(company,companyEmpWage);
 	}
 	
 	public void computeEmployeeWage() {
