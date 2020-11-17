@@ -48,12 +48,19 @@ public class EmpWageComputation implements IComputeEmpWage {
          	return totalEmpWorkingHours * companyEmpWage.empRatePerHour;
 	}
 
+	@Override
+	public int getTotalWage(String company) {
+		return companyToEmpWageMap.get(company).totalEmpWage;
+	}
+	
 	public static void main(String []args) {
-		EmpWageComputation empWageBuilder =new EmpWageComputation();
-		empWageBuilder.addCompanyEmpWage("Dmart",20,20,100);
+		IComputeEmpWage empWageBuilder =new EmpWageComputation();
+		empWageBuilder.addCompanyEmpWage( "Dmart",20,20,100);
 		empWageBuilder.addCompanyEmpWage("Reliance",15,10, 120);
 		empWageBuilder.addCompanyEmpWage("Samsung",10,25, 80);
 		empWageBuilder.computeEmployeeWage();
-
+		System.out.println("Total Wage for Dmart Company:-"+empWageBuilder.getTotalWage("Dmart"));
 	}
+
+	
 }
