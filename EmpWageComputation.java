@@ -1,6 +1,6 @@
 package employeeWageAssignmentProblem;
 
-public class EmpWageComputation {
+public class EmpWageComputation implements IComputeEmpWage {
 	//Constants
 	public static final int IS_PART_TIME=1;
 	public static final int IS_FULL_TIME=2;
@@ -12,18 +12,18 @@ public class EmpWageComputation {
 		companyEmpWageArray = new CompanyEmployeeWage[5];
 	}
 
-	private void addCompanyEmpWage(String company,int empRatePerHour,int numOfWorkingDays,int maxHoursPerMonth) {
+	public void addCompanyEmpWage(String company,int empRatePerHour,int numOfWorkingDays,int maxHoursPerMonth) {
 		companyEmpWageArray[numOfCompany]=new CompanyEmployeeWage(company,empRatePerHour,numOfWorkingDays,maxHoursPerMonth);
 		numOfCompany++;
 	}
 	
-	private void computeEmployeeWage() {
+	public void computeEmployeeWage() {
 		for (int i=0;i < numOfCompany; i++) {
 			companyEmpWageArray[i].setTotalEmpWage(this.computeEmployeeWage(companyEmpWageArray[i]));
 			System.out.println(companyEmpWageArray[i]);
 		}
 	}
-	private int computeEmployeeWage(CompanyEmployeeWage companyEmpWage) {
+	public int computeEmployeeWage(CompanyEmployeeWage companyEmpWage) {
 		//Variables
 		int empWorkHrs=0,totalEmpWorkingHours=0,totalWorkingDays=0;
 		//computation
@@ -51,5 +51,4 @@ public class EmpWageComputation {
 		empWageBuilder.computeEmployeeWage();
 
 	}
-
 }
