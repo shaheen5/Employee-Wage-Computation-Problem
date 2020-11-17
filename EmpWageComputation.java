@@ -1,4 +1,5 @@
 package employeeWageAssignmentProblem;
+import java.util.*;
 
 public class EmpWageComputation implements IComputeEmpWage {
 	//Constants
@@ -6,21 +7,22 @@ public class EmpWageComputation implements IComputeEmpWage {
 	public static final int IS_FULL_TIME=2;
 
 	private int numOfCompany=0;
-	private CompanyEmployeeWage[] companyEmpWageArray;
+	private LinkedList<CompanyEmployeeWage> companyEmpWageList;
 	
 	public EmpWageComputation() {
-		companyEmpWageArray = new CompanyEmployeeWage[5];
+		companyEmpWageList = new LinkedList<>() ;
 	}
 
 	public void addCompanyEmpWage(String company,int empRatePerHour,int numOfWorkingDays,int maxHoursPerMonth) {
-		companyEmpWageArray[numOfCompany]=new CompanyEmployeeWage(company,empRatePerHour,numOfWorkingDays,maxHoursPerMonth);
-		numOfCompany++;
+		CompanyEmployeeWage companyEmpWage=new CompanyEmployeeWage(company,empRatePerHour,numOfWorkingDays,maxHoursPerMonth);
+		companyEmpWageList.add(companyEmpWage);
 	}
 	
 	public void computeEmployeeWage() {
-		for (int i=0;i < numOfCompany; i++) {
-			companyEmpWageArray[i].setTotalEmpWage(this.computeEmployeeWage(companyEmpWageArray[i]));
-			System.out.println(companyEmpWageArray[i]);
+		for (int i=0;i < companyEmpWageList.size(); i++) {
+			CompanyEmployeeWage companyEmpWage=companyEmpWageList.get(i);
+			companyEmpWage.setTotalEmpWage(this.computeEmployeeWage(companyEmpWage));
+			System.out.println(companyEmpWage);
 		}
 	}
 	public int computeEmployeeWage(CompanyEmployeeWage companyEmpWage) {
